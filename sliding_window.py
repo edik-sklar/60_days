@@ -46,3 +46,21 @@ s ="abcbca"
 
 print(substring_set(s))
 print(substring_dict(s))
+
+def slide(s,k):
+    seen = defaultdict(int)
+    l =0
+    freq = 0
+    best = 0
+    for r, char in enumerate(s):
+        seen[char] += 1
+        freq = max(freq, seen[char])
+        if r-l +1 - freq > k: #maybe while?
+            seen[s[l]] -= 1
+            l+=1
+        best = max(best,  r-l +1 )
+    return best
+
+s = "ABAB"
+k = 2
+print(slide(s,k))
